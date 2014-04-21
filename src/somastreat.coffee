@@ -12,7 +12,9 @@
 #   HUBOT_TWITTER_TOKEN_SECRET - Twitter API access token secret
 #
 # Commands:
-#   hubot somastreat - Pulls todays food truck vendors
+#   hubot somastreat - Pulls food truck vendors for lunch today
+#   hubot somastreat lunch - Pulls food truck vendors for lunch today
+#   hubot somastreat dinner - Pulls food truck vendors for dinner tonight
 #
 # Author:
 #   jonursenbach
@@ -22,7 +24,9 @@ moment = require 'moment'
 twitter = require 'twitter'
 
 module.exports = (robot) =>
-  robot.respond /somastreat$/i, (msg) ->
+  robot.respond /somastreat( (lunch|dinner)?)?$/i, (msg) ->
+    meal = if msg.match[1] then msg.match[1].trim() else 'lunch'
+
     twit = new twitter({
         consumer_key: process.env.HUBOT_TWITTER_KEY,
         consumer_secret: process.env.HUBOT_TWITTER_SECRET,
@@ -32,11 +36,11 @@ module.exports = (robot) =>
 
     today = moment().format('M/D').toLowerCase()
 
-    twit.search 'from:SoMaStrEatFood "' + today + ' lunch"', (data) ->
+    twit.search 'from:SoMaStrEatFood "' + today + ' ' + meal + '"', (data) ->
         if typeof data.statuses == 'undefined'
             errors = JSON.parse(data.data).errors[0]
             return msg.send "Sorry, unable to pull SOMA StrEat Food Park vendors: " + errors.message
         else if typeof data.statuses[0] == 'undefined'
-            return msg.send "Todays SOMA StrEat Food Park vendor list hasn't been posted yet."
+            return msg.send "SOMA StrEat Food Park hasn't posted the vendor list yet for " + meal + '.'
 
         return msg.send 'https://twitter.com/SoMaStrEatFood/status/' + data.statuses[0].id_str
