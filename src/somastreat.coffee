@@ -41,6 +41,6 @@ module.exports = (robot) =>
             errors = JSON.parse(data.data).errors[0]
             return msg.send "Sorry, unable to pull SOMA StrEat Food Park vendors: " + errors.message
         else if typeof data.statuses[0] == 'undefined'
-            return msg.send "SOMA StrEat Food Park hasn't posted the vendor list yet for " + meal + '.'
+            return msg.send "SOMA StrEat Food Park hasn't posted the vendor list yet for " + today + " " + meal + '.'
 
         return msg.send 'https://twitter.com/SoMaStrEatFood/status/' + data.statuses[0].id_str
