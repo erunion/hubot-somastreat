@@ -1,6 +1,6 @@
 {
   "name": "hubot-somastreat",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Jon Ursenbach <jon@ursenba.ch>",
   "description": "A Hubot plugin to tell you what vendors are at the SOMA StrEat Food Park today.",
   "keywords": [
