@@ -6,6 +6,8 @@ A [Hubot](https://github.com/github/hubot) plugin to tell you what vendors are a
 ### Usage
 
     hubot somatrucks - Pulls todays food truck vendors
+    hubot somastreat lunch - Pulls food truck vendors for lunch today
+    hubot somastreat dinner - Pulls food truck vendors for dinner tonight
 
 #### Configuration
 
