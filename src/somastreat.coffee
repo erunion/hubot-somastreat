@@ -34,9 +34,22 @@ module.exports = (robot) =>
         access_token_secret: process.env.HUBOT_TWITTER_TOKEN_SECRET
     })
 
-    today = moment().format('M/D').toLowerCase()
+    today = moment().format('M/D')
 
-    twit.search 'from:SoMaStrEatFood "' + today + ' ' + meal + '"', (data) ->
+    query = []
+    query.push(today)
+
+    if meal == 'lunch'
+        query.push('-dinner')
+    else
+        query.push(meal)
+
+    query.push('from:somastreatfood')
+    query.push('since:' + moment().format('YYYY-MM-DD'))
+
+    query = query.join(' ')
+
+    twit.search query, (data) ->
         if typeof data.statuses == 'undefined'
             errors = JSON.parse(data.data).errors[0]
             return msg.send "Sorry, unable to pull SOMA StrEat Food Park vendors: " + errors.message
