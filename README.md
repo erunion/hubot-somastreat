@@ -31,7 +31,6 @@ Once you have a consumer key and secret key, you can go ahead and set up some en
     % export HUBOT_TWITTER_TOKEN_SECRET="secret"
 
 ### Installation
-1. Edit `package.json` and add `hubot-somastreat` as a dependency.
+1. `npm install hubot-somastreat --save`
 2. Add `"hubot-somastreat"` to your `external-scripts.json` file.
-3. `npm install`
-4. Reboot Hubot.
+3. Reboot Hubot.
