@@ -22,7 +22,7 @@
     "type": "git",
     "url": "https://github.com/jonursenbach/hubot-somastreat.git"
   },
-  "main": "./src/somastreat",
+  "main": "index.coffee",
   "dependencies": {
     "moment": "2.0.x",
     "twitter": "^0.2.9"
